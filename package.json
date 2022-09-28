@@ -1,0 +1,36 @@
+{
+  "name": "wp-starter-vite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "mix watch",
+    "build": "mix --production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@alpinejs/collapse": "^3.10.3",
+    "@alpinejs/focus": "^3.10.3",
+    "@alpinejs/mask": "^3.10.3",
+    "@kingshott/iodine": "^7.0.2",
+    "@popperjs/core": "^2.11.5",
+    "alpinejs": "^3.10.3",
+    "autoprefixer": "^10.4.2",
+    "browser-sync": "^2.27.9",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "fast-glob": "^3.2.11",
+    "jquery": "^3.6.1",
+    "laravel-mix": "^6.0.41",
+    "laravel-mix-clean": "^0.1.0",
+    "postcss": "^8.4.6",
+    "postcss-import": "^14.0.2",
+    "swiper": "^8.1.4",
+    "tailwind-bootstrap-grid": "^5.0.1",
+    "tailwindcss": "^3.0.24",
+    "vanilla-lazyload": "^17.8.2"
+  },
+  "dependencies": {}
+}

@@ -13,15 +13,19 @@ add_action('after_setup_theme', function() {
 });
 
 add_action('wp_enqueue_scripts', function() {
-  $mix_manifest = json_decode(file_get_contents(get_template_directory() .'/mix-manifest.json'), true);
-  if($mix_manifest) {
-    $parse_css_version = parse_url($mix_manifest['/dist/styles/bundle.css'], PHP_URL_QUERY);
-    parse_str($parse_css_version, $css_version);
-    $parse_js_version = parse_url($mix_manifest['/dist/scripts/bundle.js'], PHP_URL_QUERY);
-    parse_str($parse_js_version, $js_version);
-    wp_enqueue_style('bundle', DIST_URI .'/styles/bundle.css', [], $css_version['id'], 'all');
-    wp_dequeue_style('wp-block-library');
-    wp_enqueue_script('bundle', DIST_URI .'/scripts/bundle.js', [], $js_version['id'], true);
+  $manifest = json_decode(file_get_contents(DIST_URI .'/manifest.json'), true);
+  if(is_array($manifest)) {
+    $manifest_key = array_keys($manifest);
+    if(isset($manifest_key[0])) {
+      foreach(@$manifest[$manifest_key[0]]['css'] as $css_file) {
+        wp_enqueue_style('main', DIST_URI .'/' .$css_file, [], false, 'all');
+      }
+      wp_dequeue_style('wp-block-library');
+      $js_file = @$manifest[$manifest_key[0]]['file'];
+      if(!empty($js_file)) {
+        wp_enqueue_script('main', DIST_URI .'/' .$js_file, [], false, true);
+      }
+    }
   }
 });
 

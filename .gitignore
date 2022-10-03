@@ -59,4 +59,3 @@ yarn.lock
 .env
 
 vendor/
-mix-manifest.json

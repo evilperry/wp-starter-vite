@@ -38,7 +38,7 @@
       placeholder="Telephone *"
       :disabled="loading"
       x-mask="9999999999"
-      class="w-full p-3 border"
+      class="w-full p-3 border appearance-none"
       :class="formData.fields.telephone.message ? 'border-red-500' : 'border-black'"
     />
     <p x-show="formData.fields.telephone.message" x-cloak x-text="formData.fields.telephone.message" class="text-red-500 text-sm"></p>

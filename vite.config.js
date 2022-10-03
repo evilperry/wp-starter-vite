@@ -8,7 +8,7 @@ export default {
   build: {
     outDir: resolve(__dirname, "./dist"),
     assetsDir: "./build",
-    emptyOutDir: true,
+    emptyOutDir: false,
     manifest: true,
     target: "es2018",
     rollupOptions: {

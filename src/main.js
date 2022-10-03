@@ -1,5 +1,5 @@
-/* Main CSS */
+/* CSS */
 import "./styles/bundle.css";
 
-/* Main JS */
+/* JS */
 import "./scripts/bundle.js";

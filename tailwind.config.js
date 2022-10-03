@@ -1,11 +1,11 @@
 module.exports = {
-  content: require("fast-glob").sync([
+  content: [
     "./*.php",
     "./inc/**/*.php",
     "./components/**/*.php",
     "./templates/**/*.php",
     "./src/**/*.js",
-  ]),
+  ],
   theme: {
     extend: {
       screens: {

@@ -13,19 +13,25 @@ add_action('after_setup_theme', function() {
 });
 
 add_action('wp_enqueue_scripts', function() {
-  $manifest = json_decode(file_get_contents(DIST_URI .'/manifest.json'), true);
-  if(is_array($manifest)) {
-    $manifest_key = array_keys($manifest);
-    if(isset($manifest_key[0])) {
-      foreach(@$manifest[$manifest_key[0]]['css'] as $css_file) {
-        wp_enqueue_style('main', DIST_URI .'/' .$css_file, [], false, 'all');
-      }
-      wp_dequeue_style('wp-block-library');
-      $js_file = @$manifest[$manifest_key[0]]['file'];
-      if(!empty($js_file)) {
-        wp_enqueue_script('main', DIST_URI .'/' .$js_file, [], false, true);
+  if(file_exists(get_template_directory() .'/dist/manifest.json')) {
+    $manifest = json_decode(file_get_contents(DIST_URI .'/manifest.json'), true);
+    if(is_array($manifest)) {
+      $manifest_key = array_keys($manifest);
+      if(isset($manifest_key[0])) {
+        foreach(@$manifest[$manifest_key[0]]['css'] as $css_file) {
+          wp_enqueue_style('main', DIST_URI .'/' .$css_file, [], false, 'all');
+        }
+        wp_dequeue_style('wp-block-library');
+        $js_file = @$manifest[$manifest_key[0]]['file'];
+        if(!empty($js_file)) {
+          wp_enqueue_script('main', DIST_URI .'/' .$js_file, [], false, true);
+        }
       }
     }
+  } else {
+    add_action('wp_head', function() {
+      echo '<script type="module" crossorigin src="' .'http://localhost:3000/src/main.js' . '"></script>';
+    });
   }
 });
 

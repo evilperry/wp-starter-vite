@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "delete-dist": "npx rimraf dist/",
+    "dev": "yarn delete-dist && vite",
+    "build": "yarn delete-dist && vite build"
   },
   "dependencies": {
     "@alpinejs/collapse": "^3.10.3",
@@ -21,6 +22,7 @@
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.17",
     "postcss-import": "^15.0.0",
+    "rimraf": "^3.0.2",
     "tailwind-bootstrap-grid": "^5.0.1",
     "tailwindcss": "^3.1.8",
     "vite": "^3.1.4",

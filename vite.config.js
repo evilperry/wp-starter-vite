@@ -13,7 +13,7 @@ export default {
     target: "es2018",
     rollupOptions: {
       input: {
-        main: resolve(`${__dirname}/src/build.js`),
+        main: resolve(`${__dirname}/src/main.js`),
       },
     },
     minify: true,

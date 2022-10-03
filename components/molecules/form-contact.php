@@ -31,14 +31,14 @@
   </div>
   <div>
     <input 
-      type="tel" 
+      type="text" 
       x-model="formData.fields.telephone.value"
       @keyup="firstSubmit && formData.fields.telephone.validate(validateCallback)"
       required
       placeholder="Telephone *"
       :disabled="loading"
       x-mask="9999999999"
-      class="w-full p-3 border appearance-none"
+      class="w-full p-3 border"
       :class="formData.fields.telephone.message ? 'border-red-500' : 'border-black'"
     />
     <p x-show="formData.fields.telephone.message" x-cloak x-text="formData.fields.telephone.message" class="text-red-500 text-sm"></p>

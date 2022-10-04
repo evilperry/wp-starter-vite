@@ -1,5 +1,6 @@
 <?php
 
+require_once('vite.php');
 require_once('define.php');
 require_once('functions.php');
 require_once('hooks.php');

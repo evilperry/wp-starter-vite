@@ -21,7 +21,7 @@
           <div class="swiper-slide w-auto">
             <div class="relative overflow-hidden w-[320px] pt-[115%]">
               <img 
-                data-src="<?php echo DIST_URI .'/assets/images/items/placeholder.jpg'; ?>" 
+                data-src="<?php echo PUBLIC_URI .'/assets/images/items/placeholder.jpg'; ?>" 
                 alt="placeholder" 
                 width="1200" 
                 height="800" 

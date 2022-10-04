@@ -1,22 +1,33 @@
-import { defineConfig, loadEnv } from "vite";
+import { defineConfig, loadEnv, normalizePath } from "vite";
 import liveReload from "vite-plugin-live-reload";
-const { resolve } = require("path");
+import { viteStaticCopy } from "vite-plugin-static-copy";
+const path = require("path");
 
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   return defineConfig({
-    plugins: [liveReload(`${__dirname}/**/*.php`)],
+    plugins: [
+      liveReload(`${__dirname}/**/*.php`),
+      viteStaticCopy({
+        targets: [
+          {
+            src: "src/assets",
+            dest: "",
+          },
+        ],
+      }),
+    ],
     root: "",
     base: "/",
     build: {
-      outDir: resolve(__dirname, "./dist"),
+      outDir: normalizePath(path.resolve(__dirname, "./dist")),
       assetsDir: "./build",
-      emptyOutDir: false,
+      emptyOutDir: true,
       manifest: true,
       target: "es2018",
       rollupOptions: {
         input: {
-          main: resolve(`${__dirname}/src/main.js`),
+          main: normalizePath(path.resolve(__dirname, "./src/main.js")),
         },
       },
       minify: true,

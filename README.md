@@ -23,10 +23,14 @@ It is integrated <a href="https://alpinejs.dev/">Alpine.js</a> + <a href="https:
    ```sh
    yarn install
    ```
+
 2. Install Composer
    ```sh
    composer install
    ```
+
+3. Clone .env-example to .env
+   You can change the Vite PORT or HOST in here.
 
 <!-- USAGE EXAMPLES -->
 ## Usage

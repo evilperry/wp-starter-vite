@@ -1,6 +1,7 @@
 {
     "require": {
-        "kub-at/php-simple-html-dom-parser": "^1.9.1"
+        "kub-at/php-simple-html-dom-parser": "^1.9.1",
+        "vlucas/phpdotenv": "^5.4"
     },
     "config": {
         "platform": {

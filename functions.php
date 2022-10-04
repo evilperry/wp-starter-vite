@@ -30,7 +30,11 @@ add_action('wp_enqueue_scripts', function() {
     }
   } else {
     add_action('wp_head', function() {
-      echo '<script type="module" crossorigin src="' .'http://localhost:3000/src/main.js' . '"></script>';
+      $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+      $dotenv->safeLoad();
+      $vite_server_host = $_ENV['VITE_SERVER_HOST'] ?? 'localhost';
+      $vite_server_port = $_ENV['VITE_SERVER_PORT'] ?? 3000;
+      echo '<script type="module" crossorigin src="' .'http://' .$vite_server_host .':' .$vite_server_port .'/src/main.js' .'"></script>';
     });
   }
 });

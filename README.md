@@ -3,7 +3,7 @@
 
 WP Starter Vite is a WordPress starter theme using <a href="https://vitejs.dev/">Vite.js</a>
 
-It is integrated <a href="https://alpinejs.dev/">Alpine.js</a> + <a href="https://tailwindcss.com/">Tailwind CSS</a> to helping developer write the WordPress theme easilier.
+It integrated <a href="https://alpinejs.dev/">Alpine.js</a> + <a href="https://tailwindcss.com/">Tailwind CSS</a> to help developers write the WordPress theme easily.
 
 <!-- GETTING STARTED -->
 ## Getting Started

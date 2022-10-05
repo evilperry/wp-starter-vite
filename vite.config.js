@@ -36,11 +36,9 @@ export default ({ mode }) => {
     server: {
       cors: true,
       strictPort: true,
+      host: true,
       port: process.env.VITE_SERVER_PORT ?? 3000,
       https: false,
-      hmr: {
-        host: process.env.VITE_SERVER_HOST ?? "localhost",
-      },
     },
   });
 };

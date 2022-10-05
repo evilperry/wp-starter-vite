@@ -31,9 +31,10 @@ It integrated <a href="https://alpinejs.dev/">Alpine.js</a> + <a href="https://t
 
 3. Clone .env-example to .env
 
-   You can change the Vite PORT or HOST in here.
+   You can change the Vite server PORT in here.
    
-   <img width="266" alt="Screen Shot 2022-10-04 at 10 16 48" src="https://user-images.githubusercontent.com/14347913/193727815-ca74d7ba-9e10-4827-83c7-b94d33723a20.png">
+   <img width="211" alt="Screen Shot 2022-10-05 at 10 53 19" src="https://user-images.githubusercontent.com/14347913/193977916-15a2dba9-e135-4c39-9754-22ca49c9c74d.png">
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage

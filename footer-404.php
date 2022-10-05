@@ -1,5 +1,5 @@
 <div class="py-6">
-  <div class="container">
+  <div class="container px-5">
     <div class="font-bold">Footer 404</div>
   </div>
 </div>

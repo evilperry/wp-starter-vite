@@ -1,5 +1,5 @@
-const PopupCenter = () => {
-  window.Alpine.data("popupCenter", () => ({
+const PopupWindows = () => {
+  window.Alpine.data("popupWindows", () => ({
     open({ url, title = null, w = 640, h = 480 }) {
       if (!url) {
         return;
@@ -43,4 +43,4 @@ const PopupCenter = () => {
   }));
 };
 
-export default PopupCenter;
+export default PopupWindows;

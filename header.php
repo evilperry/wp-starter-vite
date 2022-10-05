@@ -21,7 +21,7 @@
 <body <?php body_class($body_class); ?>>
 
 <div class="py-6">
-  <div class="container">
+  <div class="container px-5">
     <a href="<?php echo get_bloginfo('url'); ?>" class="font-bold">Header</a>
   </div>
 </div>

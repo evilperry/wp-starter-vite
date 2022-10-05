@@ -15,7 +15,7 @@ const Tooltip = () => {
                 {
                   name: "offset",
                   options: {
-                    offset: [0, 16],
+                    offset: [0, 0],
                   },
                 },
               ],

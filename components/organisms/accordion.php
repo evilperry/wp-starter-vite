@@ -1,5 +1,5 @@
 <div class="py-6">
-  <div class="container">
+  <div class="container px-5">
     <h2 class="text-2xl font-bold mb-6">Accordion</h2>
     <div class="row -mx-3">
       <div class="col-6 px-3">

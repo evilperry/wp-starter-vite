@@ -68,60 +68,62 @@ if(!function_exists('ndh_get_attachment_id_by_url')) {
 /**
  * Table Of Contents
  */
-if(!function_exists('ndh_get_table_of_contents')) {
-  function ndh_get_table_of_contents($post_id) {
+if(!function_exists('grass_get_table_of_contents')) {
+  function grass_get_table_of_contents($post_id) {
     if(!$post_id) {
       return;
     }
     $content = HtmlDomParser::str_get_html(str_replace(']]>', ']]&gt;', apply_filters('the_content', get_the_content($post_id))));
-    $toc_settings = get_field('table_of_contents', $post_id)['table_of_contents'];
     $result = [];
-    if(class_exists('ACF') && $content && !empty(array_filter($toc_settings))) {
-      $heading_tags = [];
-      foreach($toc_settings as $k => $v) {
-        if($content->find($v)) {
-          array_push($heading_tags, $v);
+    if(class_exists('ACF')) {
+      $toc_settings = get_field('table_of_contents', $post_id)['table_of_contents'];
+      if($content && !empty(array_filter($toc_settings))) {
+        $heading_tags = [];
+        foreach($toc_settings as $k => $v) {
+          if($content->find($v)) {
+            array_push($heading_tags, $v);
+          }
         }
-      }
-      if(sizeof($heading_tags) > 0) {
-        $heading_tags_shift = $heading_tags;
-        array_shift($heading_tags_shift);
-        foreach($content->find($heading_tags[0]) as $k => $v) {
-          $current[$heading_tags[0]] = $k;
-          $parent_id = 0;
-          array_push($result, [
-            'id' => $v->tag .'-' .$k,
-            'tag' => $v->tag,
-            'text' => trim($v->plaintext),
-            'hash' => '#' .sanitize_title(trim($v->plaintext)),
-            'url' => rtrim(get_the_permalink($post_id), '/') .'#' .sanitize_title(trim($v->plaintext)),
-            'parent_id' => $parent_id,
-          ]);
-          if(sizeof($heading_tags) > 1) {
-            $prev_tag = $v->tag;
-            while(($v = $v->next_sibling()) && strcmp($v->tag, $heading_tags[0]) !== 0) {
-              foreach($heading_tags_shift as $key => $value) {
-                if(strcmp($v->tag, $value) == 0) {
-                  if(strcmp($value, $prev_tag) == 0) {
-                    $parent_id = $result[array_key_last($result)]['parent_id'];
-                  } else {
-                    if(array_search($value, $heading_tags) > array_search($prev_tag, $heading_tags)) {
-                      $current[$value] = 0;
-                      $parent_id = $result[array_key_last($result)]['id'];
+        if(sizeof($heading_tags) > 0) {
+          $heading_tags_shift = $heading_tags;
+          array_shift($heading_tags_shift);
+          foreach($content->find($heading_tags[0]) as $k => $v) {
+            $current[$heading_tags[0]] = $k;
+            $parent_id = 0;
+            array_push($result, [
+              'id' => $v->tag .'-' .$k,
+              'tag' => $v->tag,
+              'text' => trim($v->plaintext),
+              'hash' => '#' .sanitize_title(trim($v->plaintext)),
+              'url' => rtrim(get_the_permalink($post_id), '/') .'#' .sanitize_title(trim($v->plaintext)),
+              'parent_id' => $parent_id,
+            ]);
+            if(sizeof($heading_tags) > 1) {
+              $prev_tag = $v->tag;
+              while(($v = $v->next_sibling()) && strcmp($v->tag, $heading_tags[0]) !== 0) {
+                foreach($heading_tags_shift as $key => $value) {
+                  if(strcmp($v->tag, $value) == 0) {
+                    if(strcmp($value, $prev_tag) == 0) {
+                      $parent_id = $result[array_key_last($result)]['parent_id'];
                     } else {
-                      $parent_id = $result[array_search($result[array_key_last($result)]['parent_id'], array_column($result, 'id'))]['parent_id'];
+                      if(array_search($value, $heading_tags) > array_search($prev_tag, $heading_tags)) {
+                        $current[$value] = 0;
+                        $parent_id = $result[array_key_last($result)]['id'];
+                      } else {
+                        $parent_id = $result[array_search($result[array_key_last($result)]['parent_id'], array_column($result, 'id'))]['parent_id'];
+                      }
                     }
+                    array_push($result, [
+                      'id' => $value .'-' .$current[$value],
+                      'tag' => $value,
+                      'text' => trim($v->plaintext),
+                      'hash' => '#' .sanitize_title(trim($v->plaintext)),
+                      'url' => rtrim(get_the_permalink($post_id), '/') .'#' .sanitize_title(trim($v->plaintext)),
+                      'parent_id' => $parent_id,
+                    ]);
+                    $current[$value] += 1;
+                    $prev_tag = $value;
                   }
-                  array_push($result, [
-                    'id' => $value .'-' .$current[$value],
-                    'tag' => $value,
-                    'text' => trim($v->plaintext),
-                    'hash' => '#' .sanitize_title(trim($v->plaintext)),
-                    'url' => rtrim(get_the_permalink($post_id), '/') .'#' .sanitize_title(trim($v->plaintext)),
-                    'parent_id' => $parent_id,
-                  ]);
-                  $current[$value] += 1;
-                  $prev_tag = $value;
                 }
               }
             }

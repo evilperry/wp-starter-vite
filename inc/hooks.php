@@ -107,4 +107,25 @@ if(class_exists('ACF') && get_option('options_webp_enable')) {
   }, 15, 5);
 }
 
+/**
+ * The Content - Hash ID For H Tag
+ */
+if(class_exists('ACF')) {
+  add_filter('the_content', function($content) {
+    if(!$content) {
+      return;
+    }
+    $toc_settings = get_field('table_of_contents', get_the_ID())['table_of_contents'];
+    if(!empty(array_filter($toc_settings))) {
+      $content = HtmlDomParser::str_get_html($content);
+      foreach($toc_settings as $k => $v) {
+        foreach($content->find($v) as $element) {
+          $element->setAttribute('id', sanitize_title(trim($element->plaintext)));
+        }
+      }
+    }
+    return $content;
+  }, 15, 1);
+}
+
 ?>

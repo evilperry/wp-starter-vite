@@ -76,38 +76,6 @@ add_filter('excerpt_more', function($dots) {
 });
 
 /**
- * Attachment Image: Enable WebP
- */
-if(class_exists('ACF') && get_option('options_webp_enable')) {
-  add_filter('wp_get_attachment_image', function($html, $attachment_id, $size, $icon, $attr) {
-    $extension = (new SplFileInfo($attr['src']))->getExtension();
-    $html = HtmlDomParser::str_get_html($html);
-    foreach($html->find('img') as $img) {
-      $img->addClass('lazy');
-      $img->setAttribute('data-src', $attr['src']);
-      $img->setAttribute('data-srcset', $attr['srcset']);
-      $img->setAttribute('data-sizes', $attr['sizes']);
-      $img->removeAttribute('src');
-      $img->removeAttribute('data-srcset');
-      $img->removeAttribute('data-sizes');
-    }
-    if(strcmp($extension, 'svg') !== 0) {
-      $result = '<picture>';
-      $result .= '<source';
-      $result .= ' data-srcset="' .str_replace('.' .$extension .' ', '.' .$extension .'.webp ', $attr['srcset']) .'"';
-      $result .= ' data-sizes="' .$attr['sizes'] .'"';
-      $result .= ' type="image/webp" />';
-      $result = (get_option('options_webp_separate_folder') && !empty(get_option('options_webp_separate_folder'))) ? str_replace('/wp-content/uploads', get_option('options_webp_separate_folder'), $result) : $result;
-      $result .= $html;
-      $result .= '</picture>';
-      return $result;
-    } else {
-      return $html;
-    }  
-  }, 15, 5);
-}
-
-/**
  * The Content - Hash ID For H Tag
  */
 if(class_exists('ACF')) {
